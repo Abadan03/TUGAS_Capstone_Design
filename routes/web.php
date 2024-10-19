@@ -4,6 +4,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/home', [ProductsController::class, 'index']);
 Route::get('/product/{id}', [ProductsController::class, 'show']);
@@ -16,9 +17,15 @@ Route::post('/cart/decrease', [CartController::class, 'decrease'])->name('cart.d
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 // Route untuk memproses checkout
 Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('processCheckout');
+Route::get('/admin/products', [AdminController::class, 'showProducts']);
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/admin', function () {
+    return view('admin/index');
 });
 
 // test komit
