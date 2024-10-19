@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// test komit
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
