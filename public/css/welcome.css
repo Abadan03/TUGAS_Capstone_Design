@@ -1,0 +1,57 @@
+a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: #d74a4a; /* Warna merah yang serasi */
+    font-weight: bold; /* Membuat tulisan tebal */
+    font-size: 18px; /* Ukuran font yang lebih besar */
+    margin: 10px; /* Memberi jarak agar terlihat lebih rapi */
+}
+
+header {
+    text-align: center;
+    background-color:pink;
+    padding: 20px;
+    margin-top: 0;
+}
+
+.logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+    background-color: #f8c9c9;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #d74a4a;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+    color: #333;
+}
+
+.profile-section {
+    padding: 20px;
+}
+
+.profile-card {
+    background-color: #fff;
+    border: 1px solid #f8c9c9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card h2 {
+    font-size: 22px;
+    color: #d74a4a;
+    margin-bottom: 15px;
+}
+
+.profile-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
