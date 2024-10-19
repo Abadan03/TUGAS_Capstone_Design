@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 // test komit
+// test komit ke development bagian 2
 
 Auth::routes();
 
