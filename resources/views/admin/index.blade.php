@@ -26,21 +26,20 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Jumlah</th>
+                        <th>Stok</th>
                         <th>Harga</th>
-                        <th>Total</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    {{-- @foreach ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->nama }}</td>
-                <td>{{ $product->deskripsi }}</td>
+                <td>{{ $product->stok }}</td>
                 <td>Rp. {{ number_format($product->harga, 0, ',', '.') }}</td>
             </tr>
-            @endforeach
+            @endforeach --}}
                 </tbody>
             </table>
             <div class="total">
