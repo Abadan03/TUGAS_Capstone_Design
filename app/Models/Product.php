@@ -11,9 +11,11 @@ class Product extends Model
 
     protected $table = 'products';
     protected $fillable = [
-        "name",
+        "nama",
         "deskripsi",
         "harga",
+        "stok",
+        "gambar"
     ];
     public function carts()
     {

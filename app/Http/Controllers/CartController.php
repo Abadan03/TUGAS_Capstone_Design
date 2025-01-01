@@ -5,7 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Snap; // Make sure to include the Midtrans Snap class
+use Midtrans\Config;
+use Illuminate\Support\Facades\Log;
+// use Midtrans\CoreApi;
+// use Midtrans\Notification;
+
 
 class CartController extends Controller
 {
@@ -72,7 +79,7 @@ class CartController extends Controller
     }
 
     public function increase(Request $request)
-{
+    {
     // Ambil item keranjang berdasarkan ID
     $cartItem = Cart::find($request->id);
 
@@ -83,46 +90,71 @@ class CartController extends Controller
     }
 
     return redirect()->route('cart.index');
-}
-
-
-public function decrease(Request $request)
-{
-    // Ambil item keranjang berdasarkan ID
-    $cartItem = Cart::find($request->id);
-
-    if ($cartItem) {
-        if ($cartItem->quantity > 1) {
-            $cartItem->quantity -= 1;
-            $cartItem->save();
-            session()->flash('success', 'Jumlah produk berhasil dikurangi!');
-        } else {
-            // Jika quantity hanya 1, hapus item dari keranjang
-            $cartItem->delete();
-            session()->flash('success', 'Produk berhasil dihapus dari keranjang!');
-        }
     }
 
-    return redirect()->route('cart.index');
-}
+
+    public function decrease(Request $request)
+    {
+        // Ambil item keranjang berdasarkan ID
+        $cartItem = Cart::find($request->id);
+
+        if ($cartItem) {
+            if ($cartItem->quantity > 1) {
+                $cartItem->quantity -= 1;
+                $cartItem->save();
+                session()->flash('success', 'Jumlah produk berhasil dikurangi!');
+            } else {
+                // Jika quantity hanya 1, hapus item dari keranjang
+                $cartItem->delete();
+                session()->flash('success', 'Produk berhasil dihapus dari keranjang!');
+            }
+        }
+
+        return redirect()->route('cart.index');
+    }
 
 
     public function checkout(Request $request)
     {
-        // Ambil session_id pengguna atau user_id jika ada user login
-        $userId = auth()->check() ? auth()->user()->id : $request->session()->getId();
+        $userId = Auth::id();
+        $cartItems = Cart::where('user_id', $userId)->get();
+        $productId = $request->id;
 
-        // Ambil data produk yang ada di keranjang berdasarkan session atau user_id
-        $cartItems = Cart::where('user_id', $userId)->with('product')->get();
+        $total = 0;
+        $totalQuantity = 0; // Inisialisasi total quantity
+        $nameproduct = ''; // Inisialisasi nama produk
+        // Hapus item dari cart sesuai user_id dan product_id
+        Cart::where('user_id', $userId)->where('product_id', $productId)->delete();
 
-        // Jika keranjang kosong
-        if ($cartItems->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong!');
+        foreach ($cartItems as $item) {
+            // Ambil nama produk berdasarkan product_id
+            $product = Product::find($item->product_id);
+            if ($product) {
+                // Hitung total harga
+                $total += $product->harga * $item->quantity; 
+                // Hitung total quantity
+                $totalQuantity += $item->quantity; 
+                // Ambil nama produk
+                $nameproduct .= $product->nama . ', '; // Gabungkan nama produk
+            }
         }
 
-        // jika kuantitas kurang dari 30
+        // Hapus koma terakhir jika ada
+        $nameproduct = rtrim($nameproduct, ', ');
 
-        // Tampilkan halaman checkout
-        return view('cart.checkout', compact('cartItems'));
+        // Order
+        $order = new Order();
+        $order->order_id = uniqid(); 
+        $order->user_id = $userId;
+        $order->nama_produk = $nameproduct; // Simpan nama produk
+        $order->quantity = $totalQuantity;
+        $order->amount = $total;
+        $order->status = 1;
+        $order->save(); // Simpan ke database
+
+        return redirect()->route('orders.index');
     }
+
+    
+    
 }

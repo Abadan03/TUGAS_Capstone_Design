@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,6 +9,15 @@ body {
     display: flex;
     height: 100vh;
 }
+
+.subtopside {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 
 .container {
     display: flex;
@@ -112,4 +121,4 @@ table th, table td {
 
 .checkout-btn:hover {
     background-color: #0056b3;
-}
+} */

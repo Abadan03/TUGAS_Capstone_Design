@@ -1,9 +1,9 @@
-*{
-  margin: 0;
-  padding: 0;
-  /* box-sizing: border-box; */
-  list-style: none;
-  text-decoration: none;
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+    list-style: none;
+    text-decoration: none;
 }
 
 .content {
@@ -11,36 +11,34 @@
     padding: 1rem;
     width: calc(100% - 250px); /* Pastikan content tidak overlap */
 }
-  
+
 .sidebar {
-width: 100px; /* Atur lebar sesuai kebutuhan */
-background-color: #f8f9fa; /* Tambahkan warna latar jika diinginkan */
-height: 100vh; /* Buat sidebar setinggi viewport */
-position: fixed; /* Tetap di sebelah kiri layar */
-top: 0;
-left: 0;
-padding: 1rem;
-/* overflow-y: auto;  */
+    width: 100px; /* Atur lebar sesuai kebutuhan */
+    background-color: #f8f9fa; /* Tambahkan warna latar jika diinginkan */
+    height: 100vh; /* Buat sidebar setinggi viewport */
+    position: fixed; /* Tetap di sebelah kiri layar */
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    /* overflow-y: auto;  */
 }
 
-
-.wrapper{
-  display: flex;
+.wrapper {
+    display: flex;
 }
 
-.wrapper .sidebar{
+.wrapper .sidebar {
     height: 100%;
     background: pink;
     padding: 0px !important;
     position: fixed;
     width: 100px;
     display: grid;
-    place-items: center; 
+    place-items: center;
 }
 ul {
     padding-left: 0px !important;
     /* padding-right: 20px; */
-    
 }
 
 /* .wrapper .sidebar ul li{
@@ -51,8 +49,8 @@ ul {
     border-radius: 30px;
 } */
 
-.wrapper .sidebar ul li a{
-    color:black;
+.wrapper .sidebar ul li a {
+    color: black;
 }
 
 /* .wrapper .sidebar ul li a svg {
@@ -60,14 +58,14 @@ ul {
     height: 10px !important;
 } */
 
-.wrapper .sidebar ul a:hover li{
-  background-color: #E8DEF8;  
-  /* border-radius: 80px;   */
+.wrapper .sidebar ul a:hover li {
+    background-color: #e8def8;
+    /* border-radius: 80px;   */
 }
 
-.wrapper .more{
-  width: 100%;
-  margin-left: 170px;
+.wrapper .more {
+    width: 100%;
+    margin-left: 170px;
 }
 
 .more {
@@ -108,12 +106,11 @@ ul {
     margin-left: 170px;
 }
 
-
 .topside {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Elemen berada di kiri dan kanan */
-     /* Sejajarkan elemen secara vertikal */
+    /* Sejajarkan elemen secara vertikal */
     padding: 0 20px; /* Atur padding untuk memberi ruang di kiri dan kanan */
     background-color: #ffe7e7;
     width: 100%;

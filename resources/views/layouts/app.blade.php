@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -18,6 +19,10 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- Additional CSS -->
+    @stack('css')
+    
 </head>
 <body>
     <div id="app">
@@ -84,5 +89,9 @@
             </div>
         </main>
     </div>
+    @yield('scripts')
+
+    
+    
 </body>
 </html>

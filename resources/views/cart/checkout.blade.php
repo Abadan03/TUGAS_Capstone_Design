@@ -42,33 +42,50 @@
             <h3>Total Keseluruhan: Rp {{ number_format($total, 0, ',', '.') }}</h3>
 
             <!-- Tombol Checkout -->
-            <form action="{{ route('processCheckout') }}" method="POST" id="checkoutForm">
+            <form action="{{ route('payments.create') }}" method="POST" id="checkoutForm">
                 @csrf
                 <button type="submit" class="btn btn-primary">Lanjutkan ke Pembayaran</button>
+                <button type="submit" class="btn btn-secondary" onclick="document.getElementById('checkoutForm').submit();">
+                    Checkout Fallback
+                </button>
             </form>
+
+            {{-- Debug --}}
+            <p>Action URL: {{ route('payments.create') }}</p>
+            <p>CSRF Token: {{ csrf_token() }}</p>
 
         @else
             <h3>Keranjang Anda kosong!</h3>
         @endif
     </div>
 
-    <!-- Script untuk validasi minimum quantity -->
+@endsection
+@section('scripts')
+
+<!-- Script untuk validasi minimum quantity -->
     <script>
         document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+            console.log('Form submitted!');
             let cartItems = @json($cartItems);
             let valid = true;
+
+            console.log('Cart Items:', cartItems);
 
             cartItems.forEach(function (item) {
                 if (item.quantity < 30) {
                     valid = false;
-                    alert('Jumlah untuk produk ' + item.product.name + ' kurang dari 30. Harap tambahkan lebih banyak.');
+                    console.log('Invalid item:', item);
+                    alert('Jumlah untuk produk ' + item.product.nama + ' kurang dari 30. Harap tambahkan lebih banyak.');
                     e.preventDefault(); // Mencegah submit form
                 }
             });
 
             if (!valid) {
+                console.log('Form submission prevented.');
                 e.preventDefault(); // Jika tidak valid, mencegah submit form
             }
         });
     </script>
+
+
 @endsection

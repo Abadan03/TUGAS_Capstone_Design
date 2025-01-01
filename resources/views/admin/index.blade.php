@@ -1,53 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keranjang</title>
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <ul>
-                <li><a href="/admin">Dashboard</a></li>
-                <li><a href="#">Input produk</a></li>
-            </ul>
-        </div>
+@extends('layouts.app')
+@section('content')
 
-        <!-- Content -->
-        <div class="content">
-            <div class="header">
-                <h1>Admin</h1>
-                <img src="/images/logo-telkom.jpg" alt="Telkom University Logo" class="logo">
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Stok</th>
-                        <th>Harga</th>
-                        <th></th>
-                    </tr>
-                </thead>
+@if (session('success'))
+    <div class="alert alert-success ">
+        {{ session('success') }}
+    </div>
+@endif
 
-                <tbody>
-                    @foreach ($products as $product)
+
+<div class="">
+    <div class="topside py-4">
+        <h1 class="d-flex justify-center items-center align-middle">List Barang</h1>
+        <img src="{{asset('images/logo-telkom.jpg')}}" alt="" width="100">
+    </div>
+
+    <!-- Button for Input Barang -->
+    <div class="my-3">
+        <a href="{{ route('products.create') }}" class="btn btn-primary">Input Barang</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>{{ $product->id }}</td>
+                <th>Id</th>
+                <th>Nama Produk</th>
+                <th>deskripsi</th>
+                <th>Jumlah</th>
+                {{-- <th>Harga</th> --}}
+                {{-- <th>Total</th> --}}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $index => $product)
+            <tr>
+                <td>{{ $index + 1 }}</td>
                 <td>{{ $product->nama }}</td>
+                <td>{{ $product->deskripsi }}</td>
                 <td>{{ $product->stok }}</td>
-                <td>Rp. {{ number_format($product->harga, 0, ',', '.') }}</td>
+                <td>
+                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
-                </tbody>
-            </table>
-            <div class="total">
-                <p>Total Price: Rp 7.000</p>
-                <button class="checkout-btn">Checkout</button>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+        </tbody>
+    </table>
+</div>
+
+@endsection
