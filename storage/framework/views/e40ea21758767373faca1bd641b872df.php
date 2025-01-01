@@ -58,6 +58,8 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
+        <p class="text-start"><strong>Note:</strong> Minimal pembelian harus 5 atau di atas 5.</p>
+
         <h3>Total Price: Rp <?php echo e(number_format($total, 0, ',', '.')); ?></h3>
 
         <!-- Tombol checkout -->
@@ -65,10 +67,21 @@
         <form action="<?php echo e(route('cart.checkout')); ?>" method="POST">
             <?php echo csrf_field(); ?>
             <input type="hidden" name="total" value="<?php echo e($total); ?>">
+            <?php
+                $isDisabled = true; // Flag untuk menandai apakah tombol harus dinonaktifkan
+            ?>
             <?php $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <input type="hidden" name="id" value="<?php echo e($cart->id); ?>">
+                <input type="hidden" name="id[]" value="<?php echo e($cart->id); ?>"> <!-- Menggunakan array untuk id -->
+                <?php if($cart->quantity >= 5): ?>
+                    <?php
+                        $isDisabled = false; // Set flag jika ada item dengan kuantitas >= 5
+                    ?>
+                <?php endif; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <button type="submit" class="btn btn-primary">Confirm Checkout</button>
+        
+            <button type="submit" class="btn btn-primary" <?php echo e($isDisabled ? 'disabled' : ''); ?>>
+                Confirm Checkout
+            </button>
         </form>
         
     <?php else: ?>

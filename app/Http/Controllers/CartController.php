@@ -124,7 +124,6 @@ class CartController extends Controller
         $totalQuantity = 0; // Inisialisasi total quantity
         $nameproduct = ''; // Inisialisasi nama produk
         // Hapus item dari cart sesuai user_id dan product_id
-        Cart::where('user_id', $userId)->where('product_id', $productId)->delete();
 
         foreach ($cartItems as $item) {
             // Ambil nama produk berdasarkan product_id
@@ -151,6 +150,9 @@ class CartController extends Controller
         $order->amount = $total;
         $order->status = 1;
         $order->save(); // Simpan ke database
+
+        Cart::where('user_id', $userId)->where('product_id', $productId)->delete();
+
 
         return redirect()->route('orders.index');
     }

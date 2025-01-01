@@ -58,6 +58,8 @@
                 @endforeach
             </tbody>
         </table>
+        <p class="text-start"><strong>Note:</strong> Minimal pembelian harus 5 atau di atas 5.</p>
+
         <h3>Total Price: Rp {{ number_format($total, 0, ',', '.') }}</h3>
 
         <!-- Tombol checkout -->
@@ -65,13 +67,23 @@
         <form action="{{ route('cart.checkout') }}" method="POST">
             @csrf
             <input type="hidden" name="total" value="{{ $total }}">
+            @php
+                $isDisabled = true; // Flag untuk menandai apakah tombol harus dinonaktifkan
+            @endphp
             @foreach($cartItems as $cart)
-                <input type="hidden" name="id" value="{{ $cart->id }}">
+                <input type="hidden" name="id[]" value="{{ $cart->id }}"> <!-- Menggunakan array untuk id -->
+                @if($cart->quantity >= 5)
+                    @php
+                        $isDisabled = false; // Set flag jika ada item dengan kuantitas >= 5
+                    @endphp
+                @endif
             @endforeach
-            <button type="submit" class="btn btn-primary">Confirm Checkout</button>
+        
+            <button type="submit" class="btn btn-primary" {{ $isDisabled ? 'disabled' : '' }}>
+                Confirm Checkout
+            </button>
         </form>
-        {{-- <input type="hidden" name="total" value="{{ $total }}">
-        <button type="submit" class="btn btn-primary" id="pay-button">Confirm Checkout</button> --}}
+        
     @else
         <h3>Your cart is empty!</h3>
     @endif
