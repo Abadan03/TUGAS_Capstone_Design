@@ -47,15 +47,17 @@
     <div class="row">
         @foreach($products as $product)
             <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="{{ asset('storage/' . $product->gambar) }}" class="card-img-top img-fixed-size" alt="{{ $product->nama }}">
+                <div class="card h-100 w-full">
+                    
+                    <img src="{{ asset($product->gambar) }}" class="card-img-top " alt="{{ $product->nama }}">
+                    
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->nama }}</h5>
                         <p class="card-text">{{ $product->deskripsi }}</p>
                         <p class="card-text"><strong>Harga:</strong> Rp. {{ number_format($product->harga, 0, ',', '.') }}</p>
 
                         <!-- Tombol Tambah ke Keranjang -->
-                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        <form action="{{ route('cart.add', $product->id) }}" class="d-flex w-full justify-content-center" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button>
                         </form>

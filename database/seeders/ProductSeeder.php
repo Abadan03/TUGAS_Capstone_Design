@@ -14,20 +14,20 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         //
-        product::create(attributes:[
-            'gambar' => 'images/sus.jpg',
-            'nama' =>'Sus',
-            'deskripsi' => 'Pre-order 2 Hari',
-            'harga' => 3500,
-            'stok' => 99
-        ]);
+        // product::create(attributes:[
+        //     'gambar' => 'images/sus.jpg',
+        //     'nama' =>'Sus',
+        //     'deskripsi' => 'Pre-order 2 Hari',
+        //     'harga' => 3500,
+        //     'stok' => 99
+        // ]);
 
-        product::create(attributes:[
-            'gambar' => 'images/lemper.jpg',
-            'nama' =>'Lemper',
-            'deskripsi' => 'Pre-order 2 Hari',
-            'harga' => 3500,
-            'stok' => 99
-        ]);
+        // product::create(attributes:[
+        //     'gambar' => 'images/lemper.jpg',
+        //     'nama' =>'Lemper',
+        //     'deskripsi' => 'Pre-order 2 Hari',
+        //     'harga' => 3500,
+        //     'stok' => 99
+        // ]);
     }
 }

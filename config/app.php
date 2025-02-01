@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    Goodnesskay\LaravelPdfViewer\LaravelPdfViewerServiceProvider::class,
     /*
     |--------------------------------------------------------------------------
     | Application Environment

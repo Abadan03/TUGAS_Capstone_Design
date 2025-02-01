@@ -13,16 +13,16 @@
         <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        @if (Route::has('login'))
+                        {{-- @if (Route::has('login')) --}}
                             <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
+                                {{-- @auth --}}
                                     <a
                                         href="{{ url('/home') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
                                         Home
                                     </a>
-                                @else
+                                {{-- @else --}}
                                     <a
                                         href="{{ route('login') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
@@ -38,15 +38,15 @@
                                             Register
                                         </a>
                                     @endif
-                                @endauth
+                                {{-- @endauth --}}
                             </nav>
-                        @endif
+                        {{-- @endif --}}
                     </header>
 
                     <div class="container">
                         <!-- Header -->
                         <header>
-                            <img src="/images/logo.png" alt="Company Logo" class="logo">
+                            <h1>TUS MART</h1>
 
                             <p>Menyediakan kue terbaik dengan rasa yang tak terlupakan</p>
                         </header>
